@@ -8,6 +8,13 @@ package testp1;
  *
  * @author usuario
  */
+
+/*Esta clase permitirá, de forma muy sencilla, almacenar una representación del estado completo del
+juego: el estado del laberinto, el estado de los jugadores, el estado de los monstruos, el índice del
+jugador que tiene el turno, un indicador sobre si ya hay un ganador y un atributo adicional para
+guardar en una cadena de caracteres eventos interesantes que hayan ocurrido desde el turno anterior.
+*/
+
 public class GameState {
     private String labyrinthv;
     private String players;
@@ -16,7 +23,9 @@ public class GameState {
     private boolean winner;
     private String log;
     
-    GameState(String _lab, String _play, String _monst, int _currPlay, boolean _win, String _log){
+    //Crea un constructor para esta clase con un parámetro cara inicializar cada atributo.
+    
+    public GameState(String _lab, String _play, String _monst, int _currPlay, boolean _win, String _log){
         labyrinthv=_lab;
         players=_play;
         monsters=_monst;
@@ -24,6 +33,8 @@ public class GameState {
         winner=_win;
         log=_log;
     }
+    
+    //Añade un consultor para cada atributo.
     
     public String GetLabyrinthv(){
         return labyrinthv;
