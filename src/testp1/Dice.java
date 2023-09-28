@@ -116,15 +116,5 @@ public class Dice {
                 return false;
         }
     }
-    
-    //private int ultimoResultado;
-    //private boolean debug;
-    /*
-    private Dice(){
-        debug=false;
-        ultimo Resultado=0;
-        generator= new Random();
-    }
-*/
 }
 

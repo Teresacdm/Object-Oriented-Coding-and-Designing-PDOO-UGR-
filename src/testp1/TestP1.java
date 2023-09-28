@@ -26,18 +26,18 @@ public class TestP1 {
         System.out.println(Directions.DOWN);
         System.out.println(Orientation.HORIZONTAL);
         System.out.println(GameCharacter.MONSTER);
-        System.out.println("Posicion Aleatoria " + d.randomPos(5));
-        System.out.println("Quien empieza " + d.whoStarts(8));
-        System.out.println("Inteligencia aleatoria " + d.randomIntelligence());
-        System.out.println("Fuerza aleatoria " + d.randomStrength());
-        System.out.println(d.resurrectPlayer());
-        System.out.println(d.weaponsReward());
-        System.out.println(d.shieldsReward());
-        System.out.println(d.healthReward());
-        System.out.println(d.weaponPower());
-        System.out.println(d.shieldPower());
-        System.out.println(d.usesLeft());
-        System.out.println(d.intensity(3.9f));
+        System.out.println("Posicion Aleatoria: " + d.randomPos(5));
+        System.out.println("Quien empieza: " + d.whoStarts(8));
+        System.out.println("Inteligencia aleatoria: " + d.randomIntelligence());
+        System.out.println("Fuerza aleatoria: " + d.randomStrength());
+        System.out.println("Resurrección: " + d.resurrectPlayer());
+        System.out.println("Recompensa de armas: " + d.weaponsReward());
+        System.out.println("Recompensa de escudos: " + d.shieldsReward());
+        System.out.println("Recompensa de salud: " + d.healthReward());
+        System.out.println("Potencia del arma: " + d.weaponPower());
+        System.out.println("Potencia del esucudo: " + d.shieldPower());
+        System.out.println("Usos restantes: " + d.usesLeft());
+        System.out.println("Intensidad: " + d.intensity(3.9f));
         
     }
     
