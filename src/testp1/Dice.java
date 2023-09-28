@@ -12,14 +12,14 @@ import java.util.Random;
  */
 public class Dice {
     private static final int MAX_USES = 5; //(número máximo de usos de armas y escudos)
-    private static final double MAX_INTELLIGENCE = 10.0; //(valor máximo para la inteligencia de jugadores y monstruos)
-    private static final double MAX_STRENGTH = 10.0; //(valor máximo para la fuerza de jugadores y monstruos)
-    private static final double RESURRECT_PROB = 0.3; //(probabilidad de que un jugador sea resucitado en cada turno)
+    private static final float MAX_INTELLIGENCE = 10.0f; //(valor máximo para la inteligencia de jugadores y monstruos)
+    private static final float MAX_STRENGTH = 10.0f; //(valor máximo para la fuerza de jugadores y monstruos)
+    private static final float RESURRECT_PROB = 0.3f; //(probabilidad de que un jugador sea resucitado en cada turno)
     private static final int WEAPONS_REWARD = 2; //(numero máximo de armas recibidas al ganar un combate)
     private static final int SHIELDS_REWARD = 3; //(numero máximo de escudos recibidos al ganar un combate)
     private static final int HEALTH_REWARD = 5; //(numero máximo de unidades de salud recibidas al ganar un combate)
-    private static final double MAX_ATTACK = 3; //(máxima potencia de las armas)
-    private static final double MAX_SHIELD = 2; //(máxima potencia de los escudos)
+    private static final float MAX_ATTACK = 3f; //(máxima potencia de las armas)
+    private static final float MAX_SHIELD = 2f; //(máxima potencia de los escudos)
 
     private Random generator;
     
@@ -36,19 +36,11 @@ public class Dice {
     }
     
     public float randomIntelligence(){
-        float f;
-        double d;
-        d=generator.nextDouble()*MAX_INTELLIGENCE;
-        f=(float)d;
-        return f;
+        return generator.nextFloat()*MAX_INTELLIGENCE;
     }
     
     public float randomStrength(){
-        float f;
-        double d;
-        d=generator.nextDouble()*MAX_STRENGTH;
-        f=(float)d;
-        return f;
+        return generator.nextFloat()*MAX_STRENGTH;
     }
     
     public boolean resurrectPlayer(){
@@ -73,19 +65,11 @@ public class Dice {
     }
     
     public float weaponPower(){
-        float f;
-        double d;
-        d=generator.nextDouble()*MAX_ATTACK;
-        f=(float)d;
-        return f;
+        return generator.nextFloat()*MAX_ATTACK;
     }
     
     public float shieldPower(){
-        float f;
-        double d;
-        d=generator.nextDouble()*MAX_SHIELD;
-        f=(float)d;
-        return f;
+        return generator.nextFloat()*MAX_SHIELD;
     }
     
     public int usesLeft(){

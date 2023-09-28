@@ -26,7 +26,7 @@ public class Shield {
             return 0;
         }
     }
-    
+   
     public String toString(){
         return "W["+protection+","+uses+"]";
     }
