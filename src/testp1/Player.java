@@ -10,7 +10,7 @@ import java.util.Arrays;
  *
  * @author usuario
  */
-public class Player extends Shield, Weapon {
+public class Player{
     private static final int MAX_WEAPONS = 2;
     private static final int MAX_SHIELDS = 3;
     private static final int INITIAL_HEALTH =10;
@@ -20,25 +20,27 @@ public class Player extends Shield, Weapon {
     private float intelligence;
     private float strength;
     private float health;
-    private int row;Monster
+    private int row;
     private int col;
     private int consecutiveHits = 0;
     
-    //ArrayList Weapon lista_armas;
-    //ArrayList Shield lista_esMonstercudos;
+    ArrayList <Weapon> weapons;
+    ArrayList <Shield> shields;
     
     public Player (char _number, float _intelligence, float _strength){
         name = "Player #" + number;
         number=_number;
         intelligence=_intelligence;
         strength=_strength;
+        weapons= new ArrayList <>();
+        shields= new ArrayList <>();
     }
     
     public void resurrect(){
         health = INITIAL_HEALTH;
         resetHits();
-        //lista_armas.clear();
-        //lista_escudos.clear()
+        weapons.clear();
+        shields.clear();
     }
     
     public int getRow(){
@@ -87,57 +89,61 @@ public class Player extends Shield, Weapon {
                 row + "\nColumna: " + col + "\nGolpes Consecutivosa: " + consecutiveHits;
     }
     
-    public void receiveWeapon(){
+    private void receiveWeapon(){
         throw new UnsupportedOperationException();
     }
     
-    public void receiveShield(){
+    private void receiveShield(){
         throw new UnsupportedOperationException();
     }
     
-    public Weapon newWeapon(){
-        arma = new Weapon(weaponPower(), usesLeft());
+    private Weapon newWeapon(){
+        Weapon arma;
+        arma = new Weapon(Dice.weaponPower(), Dice.usesLeft());
+        return arma;
     }
     
-    public Shield newShield(){
-        escudo = new Shield(shieldPower(), usesLeft());
+    private Shield newShield(){
+        Shield escudo;
+        escudo = new Shield(Dice.shieldPower(), Dice.usesLeft());
+        return escudo;
     }
     
-    public float sumWeapons(){
+    private float sumWeapons(){
         float total=0;
-        for(int i=0; i<lista_armas.size(); i++){
-            total+=lista_armas[i].attack();
+        for(int i=0; i<weapons.size(); i++){
+            total+=weapons.get(i).attack();
         }
         
         return total;
     }
     
-    public float sumShields(){
+    private float sumShields(){
         float total=0;
-        for(int i=0; i<lista_escudos.size(); i++){
-            total+=lista_escudos[i].protect();
+        for(int i=0; i<shields.size(); i++){
+            total+=shields.get(i).protect();
         }
         
         return total;
     }
     
-    public float defensiveEnergy(){
+    private float defensiveEnergy(){
         return intelligence + sumShields();
     }
     
-    public boolean manageHit(float receivedAttack){
+    private boolean manageHit(float receivedAttack){
         throw new UnsupportedOperationException();
     }
     
-    public void resetHits(){
+    private void resetHits(){
         consecutiveHits=0;
     }
     
-    public void gotWounded(){
+    private void gotWounded(){
         health--;
     }
     
-    public void incConsecutiveHits(){
+    private void incConsecutiveHits(){
         consecutiveHits++;
     }
 }

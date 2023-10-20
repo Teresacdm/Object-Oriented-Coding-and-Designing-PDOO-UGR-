@@ -9,7 +9,7 @@ import java.util.ArrayList;
  *
  * @author usuario
  */
-public class Labyrinth extends Player{
+public class Labyrinth{
     private static final char BLOCK_CHAR = 'X';
     private static final char EMPTY_CHAR = '-';
     private static final char MONSTER_CHAR = 'M';
@@ -22,20 +22,24 @@ public class Labyrinth extends Player{
     private int exitRows;
     private int exitCol;
     
-    tabla_monsters = new Monster[nRows][nCols];
-    Player[][] tabla_players;
-    tabla_players = new Player[nRows][nCols];
-    char[][] tabla_estados;
-    char[][] tabla_estados = new char[nRows][nCols];
+    private Player [][] tabla_players;
+    private Monster [][] tabla_monsters;
+    private char[][] tabla_estados;
     
     public Labyrinth (int _nRows, int _nCols, int _exitRows, int _exitCol){
         nRows=_nRows;
         nCols=_nCols;
         exitRows=_exitRows;
         exitCol=_exitCol;
+        tabla_estados = new char[nRows][nCols];
+        for(int i=0; i<nRows; i++){
+            for(int j=0; j<nCols; j++){
+                tabla_estados[i][j]=EMPTY_CHAR;
+            }
+        }
     }
     
-    public void spreadPLayers(ArrayList <Player>ArrayList <Player> players){
+    public void spreadPLayers(ArrayList <Player> players){
         throw new UnsupportedOperationException();
     }
     
@@ -73,42 +77,42 @@ public class Labyrinth extends Player{
         throw new UnsupportedOperationException();
     }
     
-    public boolean posOK(int row, int col){
+    private boolean posOK(int row, int col){
         if (row<=nRows && col<=nCols)
             return true;
         else
             return false;                    
     }
     
-    public boolean emptyPos(int row, int col){
+    private boolean emptyPos(int row, int col){
         if(tabla_estados[row][col]==EMPTY_CHAR)
             return true;
         else
             return false;
     }
     
-    public boolean monsterPos(int row, int col){
+    private boolean monsterPos(int row, int col){
         if(tabla_estados[row][col]==MONSTER_CHAR)
             return true;
         else
             return false;
     }
     
-    public boolean exitPos(int row, int col){
+    private boolean exitPos(int row, int col){
         if(tabla_estados[row][col]==EXIT_CHAR)
             return true;
         else
             return false;
     }
     
-    public boolean combatPos(int row, int col){
+    private boolean combatPos(int row, int col){
         if(tabla_estados[row][col]==COMBAT_CHAR)
             return true;
         else
             return false;
     }
     
-    public boolean canStepOn(int row, int col){
+    private boolean canStepOn(int row, int col){
         if(posOK(row, col)){
             if(emptyPos(row, col) || monsterPos(row, col) || exitPos(row, col))
                 return true;
@@ -119,7 +123,7 @@ public class Labyrinth extends Player{
             return false;
     }
     
-    public void updateOldPos(int row, int col){
+    private void updateOldPos(int row, int col){
         if(posOK(row, col)){
             if(combatPos(row, col))
                 tabla_estados[row][col]=MONSTER_CHAR;
@@ -128,7 +132,7 @@ public class Labyrinth extends Player{
         }
     }
     
-    public int[] dir2Pos(int row, int col, Directions direction){
+    private int[] dir2Pos(int row, int col, Directions direction){
         int newcol=col;
         int newrow=row;
         int[] newpos = new int[2];
@@ -151,13 +155,12 @@ public class Labyrinth extends Player{
         return newpos;
     }
     
-    public int [] randomEmptyPos(){
-        //hay que crear una instancia de Dice?
+    private int [] randomEmptyPos(){
         int[] newpos = new int[2];
         int newrow, newcol;
         do{
-            newrow=randomPos(nRows);
-            newcol=randomPos(nCols);
+            newrow=Dice.randomPos(nRows);
+            newcol=Dice.randomPos(nCols);
         } while(!emptyPos(newrow, newcol));
         
         newpos[0]=newrow;
@@ -166,7 +169,7 @@ public class Labyrinth extends Player{
         return newpos;            
     }
     
-    public Monster putPlayer2D(int oldRow, int oldCold, int row, int col, Player player){
+    private Monster putPlayer2D(int oldRow, int oldCold, int row, int col, Player player){
         throw new UnsupportedOperationException();
     }
 }

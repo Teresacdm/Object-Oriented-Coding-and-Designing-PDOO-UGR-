@@ -29,7 +29,7 @@ public class Dice {
     //Random (existe en ambos lenguajes). Todos los números aleatorios se generarán usando métodos de
     //instancia de esta clase.
     
-    private Random generator;
+    private static Random generator;
     
     public Dice(){
         generator=new Random();
@@ -39,7 +39,7 @@ public class Dice {
     //parámetro el número de filas o columnas del tablero. La fila y la columna de menor valor tienen
     //como índice el número cero.
     
-    public int randomPos(int max){
+    public static int randomPos(int max){
         return generator.nextInt(max+1);
     }
     
@@ -47,25 +47,25 @@ public class Dice {
     //representa el número de jugadores en la partida. Los jugadores se numeran comenzando con el
     //número 0.
     
-    public int whoStarts(int nplayers){
+    public static int whoStarts(int nplayers){
         return generator.nextInt(nplayers);
     }
     
     //float randomIntelligence(): devuelve un valor aleatorio de inteligencia del intervalo [0,MAX_INTELLIGENCE[
     
-    public float randomIntelligence(){
+    public static float randomIntelligence(){
         return generator.nextFloat()*MAX_INTELLIGENCE;
     }
     
     //float randomStrength():devuelve un valor aleatorio de fuerza del intervalo [0, MAX_STRENGTH[
     
-    public float randomStrength(){
+    public static float randomStrength(){
         return generator.nextFloat()*MAX_STRENGTH;
     }
     
     //boolean resurrectPlayer(): indica si un jugador muerto debe ser resucitado o no.
     
-    public boolean resurrectPlayer(){
+    public static boolean resurrectPlayer(){
         float prob;
         prob=generator.nextFloat();
         if(prob<=RESURRECT_PROB)
@@ -79,7 +79,7 @@ public class Dice {
     //definición de los atributos de clase. Es decir, el número aleatorio debe estar en el intervalo cerrado
     //[0,WEAPONS_REWARD].
     
-    public int weaponsReward(){
+    public static int weaponsReward(){
         return generator.nextInt(WEAPONS_REWARD+1); //AÑADIR +1?
     }
     
@@ -87,7 +87,7 @@ public class Dice {
     //Será un número aleatorio desde 0 (inclusive) que nunca debe superar el máximo indicado en la
     //definición de los atributos de clase.
     
-    public int shieldsReward(){
+    public static int shieldsReward(){
         return generator.nextInt(SHIELDS_REWARD+1);
     }
     
@@ -95,19 +95,19 @@ public class Dice {
     //combate. Será un número aleatorio desde 0 (inclusive) que nunca debe superar el máximo indicado
     //en la definición de los atributos de clase.
     
-    public int healthReward(){
+    public static int healthReward(){
         return generator.nextInt(HEALTH_REWARD+1);
     }
     
     //float weaponPower(): devuelve un valor aleatorio en el intervalo [0, MAX_ATTACK]
     
-    public float weaponPower(){
+    public static float weaponPower(){
         return generator.nextFloat()*MAX_ATTACK;
     }
     
     //float shieldPower(): devuelve un valor aleatorio en el intervalo [0, MAX_SHIELD[
     
-    public float shieldPower(){
+    public static float shieldPower(){
         return generator.nextFloat()*MAX_SHIELD;
     }
     
@@ -115,14 +115,14 @@ public class Dice {
     //aleatorio desde 0 (inclusive) que nunca debe superar el máximo indicado en la definición de los
     //atributos de clase.
     
-    public int usesLeft(){
+    public static int usesLeft(){
         return generator.nextInt(MAX_USES+1);
     }
     
     //float intensity(float competence): devuelve la cantidad de competencia aplicada. Será un valor
     //aleatorio del intervalo [0, competence[
     
-    public float intensity(float competence){
+    public static float intensity(float competence){
         return generator.nextFloat()*competence;
     }
     
@@ -132,7 +132,7 @@ public class Dice {
     //false y si es 0 devolverá true. Es decir, las armas o escudos con más usos posibles es menos
     //probable que sean descartados.
     
-    public boolean discardElement(int usesLeft){
+    public static boolean discardElement(int usesLeft){
         if(usesLeft==0){
             return true;
         }

@@ -52,7 +52,7 @@ public class Monster extends Dice{
                 row + "\nColumna: " + col;
     }
     
-    public void gotWounded(){
+    private void gotWounded(){
         health--;
     }
     
