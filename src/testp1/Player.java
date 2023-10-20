@@ -24,8 +24,8 @@ public class Player{
     private int col;
     private int consecutiveHits = 0;
     
-    ArrayList <Weapon> weapons;
-    ArrayList <Shield> shields;
+    private ArrayList <Weapon> weapons;
+    private ArrayList <Shield> shields;
     
     public Player (char _number, float _intelligence, float _strength){
         name = "Player #" + number;

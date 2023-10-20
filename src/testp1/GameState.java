@@ -16,7 +16,7 @@ guardar en una cadena de caracteres eventos interesantes que hayan ocurrido desd
 */
 
 public class GameState {
-    private String labyrinthv;
+    private String labyrinth;
     private String players;
     private String monsters;
     private int currentPlayer;
@@ -26,7 +26,7 @@ public class GameState {
     //Crea un constructor para esta clase con un parámetro cara inicializar cada atributo.
     
     public GameState(String _lab, String _play, String _monst, int _currPlay, boolean _win, String _log){
-        labyrinthv=_lab;
+        labyrinth=_lab;
         players=_play;
         monsters=_monst;
         currentPlayer=_currPlay;
@@ -37,7 +37,7 @@ public class GameState {
     //Añade un consultor para cada atributo.
     
     public String GetLabyrinthv(){
-        return labyrinthv;
+        return labyrinth;
     }
     
     public String GetPlayers(){
