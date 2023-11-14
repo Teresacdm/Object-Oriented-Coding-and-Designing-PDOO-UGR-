@@ -22,31 +22,35 @@ public class Labyrinth{
     private int exitRows;
     private int exitCol;
     
-    private Player [][] tabla_players;
-    private Monster [][] tabla_monsters;
-    private char[][] tabla_estados;
+    private Player [][] players; //Square?????????
+    private Monster [][] monsters;
+    private char[][] labyrinth;
     
     public Labyrinth (int _nRows, int _nCols, int _exitRows, int _exitCol){
         nRows=_nRows;
         nCols=_nCols;
         exitRows=_exitRows;
         exitCol=_exitCol;
-        tabla_estados = new char[nRows][nCols];
+        labyrinth = new char[nRows][nCols];
         for(int i=0; i<nRows; i++){
             for(int j=0; j<nCols; j++){
-                tabla_estados[i][j]=EMPTY_CHAR;
+                labyrinth[i][j]=EMPTY_CHAR;
             }
         }
     }
     
     public void spreadPLayers(ArrayList <Player> players){
-        throw new UnsupportedOperationException();
+        int[] pos = new int[2];
+        for(Player p : players){
+            pos = randomEmptyPos();
+            Monster m = putPlayer2D(-1, -1, pos[ROW], pos[COL], p);
+        }
     }
     
     public boolean haveaAWinner(){
        for(int i=0; i<nRows; i++){
            for(int j=0; j<nCols; j++){
-               if(tabla_players[i][j].getRow()==0 && tabla_players[i][j].getCol()==0)
+               if(players[i][j].getRow()==0 && players[i][j].getCol()==0)
                    return true;
            }
        }
@@ -61,20 +65,52 @@ public class Labyrinth{
     public void addMonster(int row, int col, Monster monster){
         if(posOK(row, col) && emptyPos(row, col)){
             monster.setPos(row, col);
-            tabla_monsters[row][col]=monster;
+            monsters[row][col]=monster;
         }
     }
     
     public Monster putPlayer(Directions direction, Player player){
-        throw new UnsupportedOperationException();
+        int oldRow = player.getRow();
+        int oldCol = player.getCol();
+        int[] newPos = dir2Pos(oldRow, oldCol, direction);
+        Monster monster = putPlayer2D(oldRow, oldCol, newPos[ROW], newPos[COL], player);
+        return monster;
     }
     
+    //startRow y startCol indican la fila y columna desde donde se empieza a poner el obstáculo
+    //la orientación indica si vamos a prolongar nuestro obstáculo hacia izq/dcha o arriba/abajo
+    //y length cuánto vamos a prolongar ese obstáculo
     public void addBlock(Orientation orientation, int startRow, int startCol, int length){
-        throw new UnsupportedOperationException();
+        int incRow, incCol;
+        if(orientation==Orientation.VERTICAL){
+            incRow=1;
+            incCol=0;
+        }
+        else{
+            incRow=0;
+            incCol=1;
+        }
+        int row=startRow;
+        int col=startCol;
+        while((posOK(row,col))&&(emptyPos(row,col))&&(length>0)){
+            labyrinth[row][col]=BLOCK_CHAR;
+            length-=1;
+            row+=incRow;
+            col+=incCol;
+        }
     }
     
     public ArrayList <Directions> validMoves(int row, int col){
-        throw new UnsupportedOperationException();
+       ArrayList <Directions> output = new ArrayList<>();
+       if(canStepOn(row+1,col))
+           output.add(Directions.DOWN);
+       if(canStepOn(row-1,col))
+           output.add(Directions.UP);
+       if(canStepOn(row,col+1))
+           output.add(Directions.RIGHT);
+       if(canStepOn(row,col-1))
+           output.add(Directions.LEFT);
+       return output;
     }
     
     private boolean posOK(int row, int col){
@@ -85,28 +121,28 @@ public class Labyrinth{
     }
     
     private boolean emptyPos(int row, int col){
-        if(tabla_estados[row][col]==EMPTY_CHAR)
+        if(labyrinth[row][col]==EMPTY_CHAR)
             return true;
         else
             return false;
     }
     
     private boolean monsterPos(int row, int col){
-        if(tabla_estados[row][col]==MONSTER_CHAR)
+        if(labyrinth[row][col]==MONSTER_CHAR)
             return true;
         else
             return false;
     }
     
     private boolean exitPos(int row, int col){
-        if(tabla_estados[row][col]==EXIT_CHAR)
+        if(labyrinth[row][col]==EXIT_CHAR)
             return true;
         else
             return false;
     }
     
     private boolean combatPos(int row, int col){
-        if(tabla_estados[row][col]==COMBAT_CHAR)
+        if(labyrinth[row][col]==COMBAT_CHAR)
             return true;
         else
             return false;
@@ -126,9 +162,9 @@ public class Labyrinth{
     private void updateOldPos(int row, int col){
         if(posOK(row, col)){
             if(combatPos(row, col))
-                tabla_estados[row][col]=MONSTER_CHAR;
+                labyrinth[row][col]=MONSTER_CHAR;
             else
-                tabla_estados[row][col]=EMPTY_CHAR;
+                labyrinth[row][col]=EMPTY_CHAR;
         }
     }
     
@@ -169,7 +205,30 @@ public class Labyrinth{
         return newpos;            
     }
     
-    private Monster putPlayer2D(int oldRow, int oldCold, int row, int col, Player player){
-        throw new UnsupportedOperationException();
+    private Monster putPlayer2D(int oldRow, int oldCol, int row, int col, Player player){
+        Monster output;
+        //output =null??
+        if(canStepOn(row, col)){
+            if(posOK(oldRow, oldCol)){
+                Player p = players.get(oldRow, oldCol); //el método get nos devolverá el jugador que esté en esta posición
+                if(p==player){
+                    updateOldPos(oldRow, oldCol);
+                    players.set(oldRow, oldCol, null);
+                }
+            }
+            boolean monsterPos = monsterPos(row, col);
+            if(monsterPos){
+                labyrinth.set(row, col, COMBAT_CHAR);
+                output=monsters[row][col];
+            }
+            else{
+                char number = (char) player.getNumber();
+                labyrinth.set(row, col, number);
+            }
+            players.set(row, col, player);
+            player.setPos(row, col);
+        }
+        return output;
     }
 }
+

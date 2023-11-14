@@ -3,14 +3,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package testp1;
-//package Dice;
 //import java.util.ArrayList;
 
 /**
  *
  * @author usuario
  */
-public class Monster extends Dice{
+public class Monster extends Dice{ //¿extends?
     private static final int INITIAL_HEALTH =5;
     private String name;
     private float intelligence;
@@ -19,7 +18,7 @@ public class Monster extends Dice{
     private int row;
     private int col;
     
-    public Monster(String _name, float _intelligence, float _strength){ //se puede poder el mismo nombre que las variables privadas
+    public Monster(String _name, float _intelligence, float _strength){ //se puede poner el mismo nombre que las variables privadas
         name=_name;
         intelligence = _intelligence;
         strength=_strength;
@@ -38,12 +37,20 @@ public class Monster extends Dice{
     
     
     public boolean defend (float receivedAttack){
-        throw new UnsupportedOperationException();
+        boolean isDead = dead();
+        if(!isDead){
+            float defensiveEnergy = Dice.intensity(intelligence);
+            if(defensiveEnergy<receivedAttack){
+                gotWounded();
+                isDead = dead();
+            }
+        }
+        return isDead;
     }
 
     public void setPos(int _row, int _col){
         row=_row; //mejor utilizar this?
-        col=_col;char[][] tabla_estados;
+        col=_col;char[][] labyrinth;
     }
     
     public String toString(){
