@@ -39,13 +39,14 @@ public class Labyrinth{
                 labyrinth[i][j]=EMPTY_CHAR;
             }
         }
+        labyrinth[exitRow][exitCol]=EXIT_CHAR;
     }
     
     public void spreadPLayers(ArrayList <Player> players){
         int[] pos = new int[2];
         for(Player p : players){
             pos = randomEmptyPos();
-            Monster m = putPlayer2D(-1, -1, pos[ROW], pos[COL], p);
+            putPlayer2D(-1, -1, pos[ROW], pos[COL], p);
         }
     }
     
@@ -209,27 +210,27 @@ public class Labyrinth{
     private Monster putPlayer2D(int oldRow, int oldCol, int row, int col, Player player){
         Monster output;
         output =null;
-        if(canStepOn(row, col)){
+        if(canStepOn(row, col)){    // el jugador puede avanzar hacia esa casilla (destino)
             if(posOK(oldRow, oldCol)){
-                Player p = players[oldRow][oldCol];
-                if(p==player){
-                    updateOldPos(oldRow, oldCol);
+                Player p = players[oldRow][oldCol]; // obtenemos el jugador que hay en la posición origen
+                if(p==player){  // nos aseguramos que el jugador que hay es el mismo del parámetro con el que se ha llamado al método
+                    updateOldPos(oldRow, oldCol);// El jugador se va a ir de ese 'origen' debemos atualizar las matrices para que quede reflejado
                     players[oldRow][oldCol]=null;
                 }
             }
-            boolean monsterPos = monsterPos(row, col);
-            if(monsterPos){
-                labyrinth[row][col]=COMBAT_CHAR;
-                output=monsters[row][col];
+            boolean monsterPos = monsterPos(row, col);// Miramos si en el 'destino' hay un monstruo
+            if(monsterPos){ // en caso de ser así
+                labyrinth[row][col]=COMBAT_CHAR;    // marcamos la casilla como  combate (jugador y monstruo en la misma casilla)
+                output=monsters[row][col];          // recuperamos una referencia al monstruo concreto para devolverlo
             }
-            else{
-                char number = (char) player.getNumber();
+            else{   // en 'destino' no hay monstruo
+                char number = (char) player.getNumber();    // obtenemos el número del jugador para poner dicho número en esa casilla del laberinto
                 labyrinth[row][col]=number;
             }
-            players[row][col]=player;
+            players[row][col]=player;   // actualizamos el estado de la matriz de players y el estado del propio player
             player.setPos(row, col);
         }
-        return output;
+        return output;  // devolvemos (el monstruo si había, o null si no  hay monstruo)
     }
 }
 
