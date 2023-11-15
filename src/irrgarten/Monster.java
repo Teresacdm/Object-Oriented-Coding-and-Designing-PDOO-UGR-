@@ -9,7 +9,7 @@ package irrgarten;
  *
  * @author usuario
  */
-public class Monster extends Dice{ //¿extends?
+public class Monster{
     private static final int INITIAL_HEALTH =5;
     private String name;
     private float intelligence;
@@ -32,7 +32,7 @@ public class Monster extends Dice{ //¿extends?
     }
     
     public float attack(){
-        return intensity(strength);
+        return Dice.intensity(strength);
     }
     
     
@@ -54,7 +54,7 @@ public class Monster extends Dice{ //¿extends?
     }
     
     public String toString(){
-        return "Nombre: " + name + "\nInteligencia: " + intelligence +
+        return "Estado del monstruo:\nNombre: " + name + "\nInteligencia: " + intelligence +
                 "\nFuerza: " + strength + "\nSalud: " + health + "\nFila: " +
                 row + "\nColumna: " + col;
     }

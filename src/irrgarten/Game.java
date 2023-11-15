@@ -24,10 +24,11 @@ public class Game {
             Player p = new Player((char)i, Dice.randomIntelligence(), Dice.randomStrength());
             players.add(p);
         }
-        monsters=new ArrayList <>();
-        labyrinth= new Labyrinth(6,4,3, 3);
         currentPlayerIndex=Dice.whoStarts(nplayers);
         currentPlayer=players.get(currentPlayerIndex);
+        log="Comienza la partida!";
+        monsters=new ArrayList <>();
+        labyrinth= new Labyrinth(6,4,3, 3);
         configureLabyrinth();
         labyrinth.spreadPLayers(players);
     }
@@ -62,12 +63,14 @@ public class Game {
     }
     
     public GameState getGameState(){
-        GameState gst;
-        //cuando lo comprobemos, ver si nos gusta el formato con el que imprime toString directamente aplicado a un array
-        gst = new GameState(labyrinth.toString(), players.toString(), monsters.toString(), currentPlayerIndex, finished(), log);
-        return gst;
+        GameState gameState;
+        gameState = new GameState(labyrinth.toString(), players.toString(), monsters.toString(), currentPlayerIndex, finished(), log);
+        return gameState;
     }
     
+    //Configura el laberinto añadiendo bloques de obstáculos y monstruos.
+    //Los monstruos, además de en el laberinto son guardados en el contenedor
+    //propio de esta clase para este tipo de objetos.
     private void configureLabyrinth(){
         Orientation v = Orientation.VERTICAL;
         Orientation h = Orientation.HORIZONTAL;
@@ -79,11 +82,14 @@ public class Game {
         labyrinth.addBlock(v, 5, 0, 1);
         Monster monster1 = new Monster ("Marisol", Dice.randomIntelligence(), Dice.randomStrength());
         labyrinth.addMonster(3, 1, monster1);
+        monsters.add(monster1);
         Monster monster2 = new Monster ("Terraluna", Dice.randomIntelligence(), Dice.randomStrength());
         labyrinth.addMonster(5, 2, monster2);
+        monsters.add(monster2);
         
     }
     
+    //Actualiza los dos atributos que indican el jugador (current*) con el turno pasando al siguiente jugador
     private void nextPlayer(){
         if(currentPlayerIndex!=players.size()-1)
             currentPlayerIndex++;
@@ -113,7 +119,7 @@ public class Game {
             lose = currentPlayer.defend(monsterAttack);
             if(!lose){
                 playerAttack=currentPlayer.attack();
-                winner = GameCharacter.PLAYER; //este es el orden?
+                winner = GameCharacter.PLAYER; 
                 lose = monster.defend(playerAttack);
             }
         }

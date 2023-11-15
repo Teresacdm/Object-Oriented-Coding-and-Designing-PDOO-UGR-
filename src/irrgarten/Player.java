@@ -37,6 +37,9 @@ public class Player{
         shields= new ArrayList <>();
     }
     
+    //Este método realiza las tareas asociadas a la resurrección. Debe hacer que las listas
+    //de armas y escudos sean listas vacías, que el nivel de salud sea el determinado para el inicio del
+    //juego y el número consecutivo de impactos cero.
     public void resurrect(){
         health = INITIAL_HEALTH;
         resetHits();
@@ -62,10 +65,7 @@ public class Player{
     }
     
     public boolean dead(){
-        if (health <= 0)
-            return true;
-        else
-            return false;
+        return (health <= 0);
     }
     
     public Directions move (Directions direction, ArrayList <Directions> validMoves){
@@ -79,20 +79,13 @@ public class Player{
             return direction;
     }
     
+    //Calcula la suma de la fuerza del jugador y la suma de lo aportado por sus armas
     public float attack(){
         return strength + sumWeapons();
     }
     
     public boolean defend (float receivedAttack){
-        boolean isDead = dead();
-        if(!isDead){
-            float defensiveEnergy = Dice.intensity(intelligence);
-            if(defensiveEnergy<receivedAttack){
-                gotWounded();
-                isDead = dead();
-            }
-        }
-        return isDead;
+        return manageHit(receivedAttack);
     }
     
     public void receiveReward(){ //currentPlayer? (Diagrama de Secuencia)
@@ -111,9 +104,9 @@ public class Player{
     }
     
     public String toString(){
-        return "Nombre: " + name + "\nInteligencia: " + intelligence +
+        return "Estado del jugador:\nNombre: " + name + "\nNúmero: " + number + "\nInteligencia: " + intelligence +
                 "\nFuerza: " + strength + "\nSalud: " + health + "\nFila: " +
-                row + "\nColumna: " + col + "\nGolpes Consecutivosa: " + consecutiveHits;
+                row + "\nColumna: " + col + "\nGolpes Consecutivos: " + consecutiveHits;
     }
     
     private void receiveWeapon(Weapon w){
@@ -143,14 +136,12 @@ public class Player{
     }
     
     private Weapon newWeapon(){
-        Weapon arma;
-        arma = new Weapon(Dice.weaponPower(), Dice.usesLeft());
+        Weapon arma = new Weapon(Dice.weaponPower(), Dice.usesLeft());
         return arma;
     }
     
     private Shield newShield(){
-        Shield escudo;
-        escudo = new Shield(Dice.shieldPower(), Dice.usesLeft());
+        Shield escudo = new Shield(Dice.shieldPower(), Dice.usesLeft());
         return escudo;
     }
     
@@ -159,7 +150,6 @@ public class Player{
         for(int i=0; i<weapons.size(); i++){
             total+=weapons.get(i).attack();
         }
-        
         return total;
     }
     
@@ -168,7 +158,6 @@ public class Player{
         for(int i=0; i<shields.size(); i++){
             total+=shields.get(i).protect();
         }
-        
         return total;
     }
     

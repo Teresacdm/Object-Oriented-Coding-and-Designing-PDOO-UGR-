@@ -54,12 +54,16 @@ public class Labyrinth{
     }
     
     public String toString(){
-        return "Número de filas: " + nRows + "\nNúmero de columnas: " + nCols + 
+        return "Estado del laberinto:\nNúmero de filas: " + nRows + "\nNúmero de columnas: " + nCols + 
                 "\nFila de Salida: " + exitRow + "\nColumna de Salida: " + exitCol;
     }
     
+    //Si la posición suministrada está dentro del tablero y
+    //está vacía, anota en el laberinto la presencia de un monstruo, guarda la referencia del monstruo en el
+    //atributo contenedor adecuado e indica al monstruo cual es su posición actual (setPos).
     public void addMonster(int row, int col, Monster monster){
         if(posOK(row, col) && emptyPos(row, col)){
+            labyrinth[row][col]=MONSTER_CHAR;
             monster.setPos(row, col);
             monsters[row][col]=monster;
         }
@@ -140,6 +144,12 @@ public class Labyrinth{
             return false;
     }
     
+    //Este método sólo realiza su función si la posición suministrada está
+    //dentro del laberinto. Si es el caso, si en esa posición el laberinto estaba indicando el estado de
+    //combate, el estado de esa casilla del laberinto pasa a indicar que simplemente hay un monstruo. En
+    //otro caso, el estado de esa casilla del laberinto pasa a indicar que está vacía. Este método es llamado
+    //cuando un jugador abandona una casilla y se encarga de dejar la casilla que se abandona en el
+    //estado correcto.
     private void updateOldPos(int row, int col){
         if(posOK(row, col)){
             if(combatPos(row, col))
@@ -149,6 +159,9 @@ public class Labyrinth{
         }
     }
     
+    //Este método calcula la posición del laberinto a la que se llegaría si desde la posición suministrada
+    //se avanza en la dirección pasada como parámetro. No es necesario realizar comprobaciones relativas a
+    //no generar posiciones fuera del laberinto.
     private int[] dir2Pos(int row, int col, Directions direction){
         int newcol=col;
         int newrow=row;
@@ -176,6 +189,9 @@ public class Labyrinth{
         return newpos;
     }
     
+    //Utilizando el dado, genera una posición aleatoria en el laberinto (fila y columna)
+    //asegurando que esta esté vacía. Genera internamente posiciones hasta que se cumple esta
+    //restricción y una vez generada se devuelve. Si no hay posiciones vacías se producirá un bucle infinito.
     private int [] randomEmptyPos(){
         int[] newpos = new int[2];
         int newrow, newcol;
