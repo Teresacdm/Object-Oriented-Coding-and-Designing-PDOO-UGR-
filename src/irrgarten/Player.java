@@ -106,7 +106,7 @@ public class Player{
     public String toString(){
         return "Estado del jugador:\nNombre: " + name + "\nNúmero: " + number + "\nInteligencia: " + intelligence +
                 "\nFuerza: " + strength + "\nSalud: " + health + "\nFila: " +
-                row + "\nColumna: " + col + "\nGolpes Consecutivos: " + consecutiveHits;
+                row + "\nColumna: " + col + "\nGolpes Consecutivos: " + consecutiveHits + "\nArmas: " + weapons.toString() + "\nEscudos: " + shields.toString();
     }
     
     private void receiveWeapon(Weapon w){

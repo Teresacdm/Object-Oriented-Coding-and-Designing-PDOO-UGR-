@@ -22,6 +22,7 @@ public class Monster{
         name=_name;
         intelligence = _intelligence;
         strength=_strength;
+        health=INITIAL_HEALTH;
     }
     
     public boolean dead(){
