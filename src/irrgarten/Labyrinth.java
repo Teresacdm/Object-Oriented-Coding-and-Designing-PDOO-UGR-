@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package testp1;
+package irrgarten;
 import java.util.ArrayList;
 
 /**
@@ -207,25 +207,25 @@ public class Labyrinth{
     
     private Monster putPlayer2D(int oldRow, int oldCol, int row, int col, Player player){
         Monster output;
-        //output =null??
+        output =null;
         if(canStepOn(row, col)){
             if(posOK(oldRow, oldCol)){
-                Player p = players.get(oldRow, oldCol); //el método get nos devolverá el jugador que esté en esta posición
+                Player p = players[oldRow][oldCol];
                 if(p==player){
                     updateOldPos(oldRow, oldCol);
-                    players.set(oldRow, oldCol, null);
+                    players[oldRow][oldCol]=null;
                 }
             }
             boolean monsterPos = monsterPos(row, col);
             if(monsterPos){
-                labyrinth.set(row, col, COMBAT_CHAR);
+                labyrinth[row][col]=COMBAT_CHAR;
                 output=monsters[row][col];
             }
             else{
                 char number = (char) player.getNumber();
-                labyrinth.set(row, col, number);
+                labyrinth[row][col]=number;
             }
-            players.set(row, col, player);
+            players[row][col]=player;
             player.setPos(row, col);
         }
         return output;

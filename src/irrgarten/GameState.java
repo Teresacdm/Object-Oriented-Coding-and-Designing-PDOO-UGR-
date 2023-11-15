@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package testp1;
+package irrgarten;
 
 /**
  *
@@ -36,7 +36,7 @@ public class GameState {
     
     //Añade un consultor para cada atributo.
     
-    public String GetLabyrinthv(){
+    public String GetLabyrinth(){
         return labyrinth;
     }
     

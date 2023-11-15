@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package testp1;
+package irrgarten;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -70,6 +70,12 @@ public class Player{
     public Directions move (Directions direction, ArrayList <Directions> validMoves){
         int size = validMoves.size();
         boolean contained = validMoves.contains(direction);
+        if((size>0)&&(!contained)){
+            Directions firstElement=validMoves.get(0);
+            return firstElement;
+        }
+        else
+            return direction;
     }
     
     public float attack(){
@@ -77,7 +83,15 @@ public class Player{
     }
     
     public boolean defend (float receivedAttack){
-        return manageHit(receivedAttack);
+        boolean isDead = dead();
+        if(!isDead){
+            float defensiveEnergy = Dice.intensity(intelligence);
+            if(defensiveEnergy<receivedAttack){
+                gotWounded();
+                isDead = dead();
+            }
+        }
+        return isDead;
     }
     
     public void receiveReward(){ //currentPlayer? (Diagrama de Secuencia)
