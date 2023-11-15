@@ -180,7 +180,7 @@ public class Game {
     }
     
     private void logRounds(int rounds, int max){
-        log+="Se han producido " + rounds + " rondas de " + max + "en el combate";
+        log+="Se han producido " + rounds + " rondas de " + max + " en el combate";
         log+="\n";
     }
 }
