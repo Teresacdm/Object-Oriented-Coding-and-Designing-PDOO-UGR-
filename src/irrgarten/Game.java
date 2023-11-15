@@ -150,7 +150,7 @@ public class Game {
     }
     
     private void logPlayerWon(){
-        log+="El jugador" + currentPlayer.getNumber() + "ha ganado el combate";
+        log+="El jugador " + currentPlayer.getNumber() + " ha ganado el combate";
         log+="\n";
     }
     
