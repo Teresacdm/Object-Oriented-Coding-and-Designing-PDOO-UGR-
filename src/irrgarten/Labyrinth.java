@@ -224,7 +224,7 @@ public class Labyrinth{
                 output=monsters[row][col];          // recuperamos una referencia al monstruo concreto para devolverlo
             }
             else{   // en 'destino' no hay monstruo
-                char number = (char) player.getNumber();    // obtenemos el número del jugador para poner dicho número en esa casilla del laberinto
+                char number = player.getNumber();    // obtenemos el número del jugador para poner dicho número en esa casilla del laberinto
                 labyrinth[row][col]=number;
             }
             players[row][col]=player;   // actualizamos el estado de la matriz de players y el estado del propio player

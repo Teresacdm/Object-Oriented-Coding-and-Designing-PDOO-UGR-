@@ -55,7 +55,7 @@ public class Player{
         return col;
     }
     
-    public int getNumber(){
+    public char getNumber(){
         return number;
     }
     
