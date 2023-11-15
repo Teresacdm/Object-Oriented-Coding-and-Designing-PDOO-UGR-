@@ -26,7 +26,7 @@ public class Game {
         }
         currentPlayerIndex=Dice.whoStarts(nplayers);
         currentPlayer=players.get(currentPlayerIndex);
-        log="Comienza la partida!";
+        log="Comienza la partida!\n";
         monsters=new ArrayList <>();
         labyrinth= new Labyrinth(6,4,3, 3);
         configureLabyrinth();
@@ -77,7 +77,7 @@ public class Game {
         labyrinth.addBlock(v, 0, 1, 1);
         labyrinth.addBlock(v, 0, 3, 1);
         labyrinth.addBlock(v, 2, 3, 1);
-        labyrinth.addBlock(v, 2, 1, 2);
+        labyrinth.addBlock(v, 2, 0, 2);
         labyrinth.addBlock(h, 4, 2, 2);
         labyrinth.addBlock(v, 5, 0, 1);
         Monster monster1 = new Monster ("Marisol", Dice.randomIntelligence(), Dice.randomStrength());
