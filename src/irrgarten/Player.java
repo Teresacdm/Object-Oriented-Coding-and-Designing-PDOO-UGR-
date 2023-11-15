@@ -28,7 +28,7 @@ public class Player{
     private ArrayList <Shield> shields;
     
     public Player (char _number, float _intelligence, float _strength){
-        number=_number;
+        number= _number;
         name = "Player #" + number;
         intelligence=_intelligence;
         strength=_strength;

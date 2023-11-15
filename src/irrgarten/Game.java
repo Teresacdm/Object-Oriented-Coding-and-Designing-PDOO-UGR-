@@ -20,8 +20,9 @@ public class Game {
     
     public Game(int nplayers){
         players= new ArrayList<>();
-        for (int i=0; i<nplayers; i++){
-            Player p = new Player((char)i, Dice.randomIntelligence(), Dice.randomStrength());
+        for (int i=0; i<nplayers; i++){  
+            char num = Integer.toString(i).charAt(0);
+            Player p = new Player( num , Dice.randomIntelligence(), Dice.randomStrength());
             players.add(p);
         }
         currentPlayerIndex=Dice.whoStarts(nplayers);
