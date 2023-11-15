@@ -19,8 +19,10 @@ public class Game {
     private Labyrinth labyrinth;
     
     public Game(int nplayers){
+        players= new ArrayList<>();
         for (int i=0; i<nplayers; i++){
-            players.add(new Player((char)i, Dice.randomIntelligence(), Dice.randomStrength()));
+            Player p = new Player((char)i, Dice.randomIntelligence(), Dice.randomStrength());
+            players.add(p);
         }
         monsters=new ArrayList <>();
         labyrinth= new Labyrinth(6,4,3, 3);
@@ -36,7 +38,6 @@ public class Game {
     
     public boolean nextStep(Directions preferredDirection){
         boolean dead=currentPlayer.dead();
-        String log = "";
         if(!dead){
             Directions direction = actualDirection(preferredDirection);
             if(direction!=preferredDirection){
@@ -84,7 +85,10 @@ public class Game {
     }
     
     private void nextPlayer(){
-        currentPlayerIndex++;
+        if(currentPlayerIndex!=players.size()-1)
+            currentPlayerIndex++;
+        else
+            currentPlayerIndex=0;
         currentPlayer=players.get(currentPlayerIndex);
     }
     
@@ -144,27 +148,27 @@ public class Game {
     }
     
     private void logMonsterWon(){
-        log+="El monstruo ha ganado el combate"; //Qué mosntruo???
+        log+="El monstruo ha ganado el combate";
         log+="\n";
     }
     
     private void logResurrected(){
-        log+="El jugador" + currentPlayer.getNumber() + "ha resucitado";
+        log+="El jugador " + currentPlayer.getNumber() + " ha resucitado";
         log+="\n";
     }
     
     private void logPlayerSkipTurn(){
-        log+="El jugador" + currentPlayer.getNumber() + "ha perdido el turno por estar muerto";
+        log+="El jugador " + currentPlayer.getNumber() + " ha perdido el turno por estar muerto";
         log+="\n";
     }
     
     private void logPlayerNoOrders(){
-        log+="El jugador" + currentPlayer.getNumber() + "no ha seguido las instrucciones del jugador humano";
+        log+="El jugador " + currentPlayer.getNumber() + " no ha seguido las instrucciones del jugador humano";
         log+="\n";
     }
     
     private void logNoMonster(){
-        log+="El jugador" + currentPlayer.getNumber() + "se ha movido a una celda vacía o no le ha sido posible moverse";
+        log+="El jugador " + currentPlayer.getNumber() + " se ha movido a una celda vacía o no le ha sido posible moverse";
         log+="\n";
     }
     

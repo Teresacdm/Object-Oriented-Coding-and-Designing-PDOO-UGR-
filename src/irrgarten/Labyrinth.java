@@ -19,18 +19,20 @@ public class Labyrinth{
     private static final int COL = 1;
     private int nRows;
     private int nCols;
-    private int exitRows;
+    private int exitRow;
     private int exitCol;
     
-    private Player [][] players; //Square?????????
+    private Player [][] players; 
     private Monster [][] monsters;
     private char[][] labyrinth;
     
-    public Labyrinth (int _nRows, int _nCols, int _exitRows, int _exitCol){
+   public Labyrinth (int _nRows, int _nCols, int _exitRow, int _exitCol){
         nRows=_nRows;
         nCols=_nCols;
-        exitRows=_exitRows;
+        exitRow=_exitRow;
         exitCol=_exitCol;
+        monsters = new Monster[nRows][nCols];
+        players = new Player[nRows][nCols];
         labyrinth = new char[nRows][nCols];
         for(int i=0; i<nRows; i++){
             for(int j=0; j<nCols; j++){
@@ -48,18 +50,12 @@ public class Labyrinth{
     }
     
     public boolean haveaAWinner(){
-       for(int i=0; i<nRows; i++){
-           for(int j=0; j<nCols; j++){
-               if(players[i][j].getRow()==0 && players[i][j].getCol()==0)
-                   return true;
-           }
-       }
-       return false;
+       return (players[exitRow][exitCol]!=null);
     }
     
     public String toString(){
         return "Número de filas: " + nRows + "\nNúmero de columnas: " + nCols + 
-                "\nNúmero de Filas de Salida: " + exitRows + "\nNúmero de Columnas de Salida: " + exitCol;
+                "\nFila de Salida: " + exitRow + "\nColumna de Salida: " + exitCol;
     }
     
     public void addMonster(int row, int col, Monster monster){
@@ -114,38 +110,23 @@ public class Labyrinth{
     }
     
     private boolean posOK(int row, int col){
-        if (row<=nRows && col<=nCols)
-            return true;
-        else
-            return false;                    
+        return (row >= 0 && row<nRows && col >= 0 && col<nCols);                   
     }
     
     private boolean emptyPos(int row, int col){
-        if(labyrinth[row][col]==EMPTY_CHAR)
-            return true;
-        else
-            return false;
+        return(labyrinth[row][col]==EMPTY_CHAR);
     }
     
     private boolean monsterPos(int row, int col){
-        if(labyrinth[row][col]==MONSTER_CHAR)
-            return true;
-        else
-            return false;
+        return(labyrinth[row][col]==MONSTER_CHAR);
     }
     
     private boolean exitPos(int row, int col){
-        if(labyrinth[row][col]==EXIT_CHAR)
-            return true;
-        else
-            return false;
+        return(labyrinth[row][col]==EXIT_CHAR);
     }
     
     private boolean combatPos(int row, int col){
-        if(labyrinth[row][col]==COMBAT_CHAR)
-            return true;
-        else
-            return false;
+        return(labyrinth[row][col]==COMBAT_CHAR);
     }
     
     private boolean canStepOn(int row, int col){
@@ -174,16 +155,20 @@ public class Labyrinth{
         int[] newpos = new int[2];
         switch (direction){
             case LEFT:
-                newcol--;
+                if(canStepOn(newrow,(col-1)))
+                    newcol--;
                 break;
             case RIGHT:
-                newcol++;
+                if(canStepOn(newrow,(col+1)))
+                    newcol++;
                 break;
             case UP:
-                newrow--;
+                if(canStepOn((row-1),newcol))
+                    newrow--;
                 break;
             case DOWN:
-                newrow++;
+                if(canStepOn((row+1),newcol))
+                    newrow++;
                 break;
         }
         newpos[0]=newrow;

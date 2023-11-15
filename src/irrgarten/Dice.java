@@ -29,18 +29,14 @@ public class Dice {
     //Random (existe en ambos lenguajes). Todos los números aleatorios se generarán usando métodos de
     //instancia de esta clase.
     
-    private static Random generator;
-    
-    public Dice(){
-        generator=new Random();
-    }
+    private static Random generator=new Random();
     
     //int randomPos(int max): devuelve un número de fila o columna aleatoria siendo el valor del
     //parámetro el número de filas o columnas del tablero. La fila y la columna de menor valor tienen
     //como índice el número cero.
     
     public static int randomPos(int max){
-        return generator.nextInt(max+1);
+        return generator.nextInt(max);
     }
     
     //int whoStarts(int nplayers): devuelve el índice del jugador que comenzará la partida. El parámetro

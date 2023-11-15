@@ -49,8 +49,8 @@ public class Monster extends Dice{ //¿extends?
     }
 
     public void setPos(int _row, int _col){
-        row=_row; //mejor utilizar this?
-        col=_col;char[][] labyrinth;
+        row=_row; 
+        col=_col;
     }
     
     public String toString(){
