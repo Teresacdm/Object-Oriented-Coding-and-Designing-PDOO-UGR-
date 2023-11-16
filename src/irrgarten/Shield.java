@@ -42,7 +42,7 @@ public class Shield {
     //aún puede ser usado 4 veces.
     
     public String toString(){
-        return "W["+protection+","+uses+"]";
+        return "S["+protection+","+uses+"]";
     }
     
     //boolean discard(): este método produce el resultado delegando en el método discardElement del
@@ -50,7 +50,6 @@ public class Shield {
     //decisión de si un arma o escudo debe ser descartado.
     
     public boolean discard(){
-        Dice d = new Dice();
-        return d.discardElement(uses);
+        return Dice.discardElement(uses);
     }
 }

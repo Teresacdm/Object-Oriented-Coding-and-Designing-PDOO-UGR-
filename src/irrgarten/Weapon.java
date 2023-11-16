@@ -51,7 +51,6 @@ public class Weapon {
     //decisión de si un arma o escudo debe ser descartado.
     
     public boolean discard(){
-        Dice d = new Dice();
-        return d.discardElement(uses);
+        return Dice.discardElement(uses);
     }
 }
