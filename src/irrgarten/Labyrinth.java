@@ -55,8 +55,14 @@ public class Labyrinth{
     }
     
     public String toString(){
-        return "Estado del laberinto:\nNúmero de filas: " + nRows + "\nNúmero de columnas: " + nCols + 
-                "\nFila de Salida: " + exitRow + "\nColumna de Salida: " + exitCol;
+        String matrix = "\n";
+        for(int i=0; i<nRows; i++){
+            matrix += "| ";
+            for(int j=0; j<nCols; j++)
+                matrix += labyrinth[i][j] + " | ";
+            matrix +="\n";
+        }
+        return matrix;
     }
     
     //Si la posición suministrada está dentro del tablero y
