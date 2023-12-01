@@ -9,59 +9,35 @@ package irrgarten;
  *
  * @author usuario
  */
-public class Monster{
+public class Monster extends LabyrinthCharacter{
     private static final int INITIAL_HEALTH =5;
-    private String name;
-    private float intelligence;
-    private float strength;
-    private float health;
-    private int row;
-    private int col;
     
-    public Monster(String _name, float _intelligence, float _strength){ //se puede poner el mismo nombre que las variables privadas
-        name=_name;
-        intelligence = _intelligence;
-        strength=_strength;
-        health=INITIAL_HEALTH;
+    public Monster(String _name, float _intelligence, float _strength){ 
+        super(_name, _intelligence, _strength, INITIAL_HEALTH);
     }
     
-    public boolean dead(){
-        if (health<=0)
-            return true;
-        else
-            return false;
-    }
-    
+    @Override
     public float attack(){
-        return Dice.intensity(strength);
+        return Dice.intensity(getStrength());
     }
     
-    
+    @Override
     public boolean defend (float receivedAttack){
         boolean isDead = dead();
         if(!isDead){
-            float defensiveEnergy = Dice.intensity(intelligence);
+            float defensiveEnergy = Dice.intensity(getIntelligence());
             if(defensiveEnergy<receivedAttack){
                 gotWounded();
                 isDead = dead();
             }
         }
         return isDead;
-    }
-
-    public void setPos(int _row, int _col){
-        row=_row; 
-        col=_col;
-    }
+    }   
     
     public String toString(){
-        return "Estado del monstruo:\nNombre: " + name + "\nInteligencia: " + intelligence +
-                "\nFuerza: " + strength + "\nSalud: " + health + "\nFila: " +
-                row + "\nColumna: " + col;
+        return "Estado del monstruo:" + super.toString();
     }
     
-    private void gotWounded(){
-        health--;
-    }
+    
     
 }

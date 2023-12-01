@@ -4,6 +4,7 @@
  */
 package irrgarten;
 import java.util.Random;
+import java.util.ArrayList;
 
 /**
  *
@@ -136,13 +137,28 @@ public class Dice {
             double d_usesLeft=usesLeft;
             double d_max_uses=MAX_USES;
             double porc=d_usesLeft/d_max_uses;
-            porc=1/porc;
+            porc=1.0/porc;
             double prob=generator.nextDouble();
             if(prob>=porc)
                 return true;
             else
                 return false;
         }
+    }
+    
+    //Este método devolverá la dirección de movimiento preferente (primer parámetro) con una
+    //probabilidad proporcional al valor de inteligencia suministrado (tercer parámetro). En el caso de no
+    //generar como resultado la dirección indicada por el primer parámetro, se elegirá una al azar de las
+    //válidas (contenidas en el segundo parámetro).
+    public static Directions nextStep(Directions preference, ArrayList<Directions> validMoves, float intelligence){
+        float prob=generator.nextFloat();
+        float prob_int= intelligence/MAX_INTELLIGENCE;
+        if (prob_int>=prob && validMoves.contains(preference))
+            return preference;
+        else{
+            return validMoves.get(generator.nextInt(validMoves.size()));
+        }
+                    
     }
 }
 
