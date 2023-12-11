@@ -29,7 +29,7 @@ public class Game {
         currentPlayer=players.get(currentPlayerIndex);
         log="Comienza la partida!\n";
         monsters=new ArrayList <>();
-        labyrinth= new Labyrinth(6,4,3, 3);
+        labyrinth= new Labyrinth(10,10,9, 9);
         configureLabyrinth();
         labyrinth.spreadPLayers(players);
     }
@@ -87,6 +87,18 @@ public class Game {
         Monster monster2 = new Monster ("Terraluna", Dice.randomIntelligence(), Dice.randomStrength());
         labyrinth.addMonster(5, 2, monster2);
         monsters.add(monster2);
+        Monster monster3 = new Monster ("Eva", Dice.randomIntelligence(), Dice.randomStrength());
+        labyrinth.addMonster(7, 6, monster3);
+        monsters.add(monster3);
+        Monster monster4 = new Monster ("Teresa", Dice.randomIntelligence(), Dice.randomStrength());
+        labyrinth.addMonster(6, 3, monster4);
+        monsters.add(monster4);
+        Monster monster5 = new Monster ("Rico", Dice.randomIntelligence(), Dice.randomStrength());
+        labyrinth.addMonster(8, 5, monster5);
+        monsters.add(monster5);
+        Monster monster6 = new Monster ("Antonia", Dice.randomIntelligence(), Dice.randomStrength());
+        labyrinth.addMonster(1, 4, monster6);
+        monsters.add(monster6);
         
     }
     
@@ -142,6 +154,7 @@ public class Game {
         boolean resurrect = Dice.resurrectPlayer();
         if(resurrect){
             currentPlayer.resurrect();
+            currentPlayer = new FuzzyPlayer(currentPlayer);
             logResurrected();
         }
         else{
@@ -160,7 +173,7 @@ public class Game {
     }
     
     private void logResurrected(){
-        log+="El jugador " + currentPlayer.getNumber() + " ha resucitado";
+        log+="El jugador " + currentPlayer.getNumber() + " ha resucitado y ahora es FuzzyPlayer";
         log+="\n";
     }
     

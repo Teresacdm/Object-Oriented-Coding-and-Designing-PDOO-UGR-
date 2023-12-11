@@ -30,8 +30,9 @@ public abstract class LabyrinthCharacter {
     }
     
     public boolean dead(){
-        if (health<=0)
+        if (health<=0){
             return true;
+        }
         else
             return false;
     }
@@ -66,9 +67,9 @@ public abstract class LabyrinthCharacter {
     }
     
     public String toString(){
-        return "\nNombre: " + name + "\nInteligencia: " + intelligence +
-                "\nFuerza: " + strength + "\nSalud: " + health + "\nFila: " +
-                row + "\nColumna: " + col;
+        return "Nombre: " + name + ", Inteligencia: " + intelligence +
+                ", Fuerza: " + strength + ", Salud: " + health + ", Fila: " +
+                row + ", Columna: " + col;
     }
     
     protected void gotWounded(){

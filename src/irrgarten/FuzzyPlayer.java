@@ -29,4 +29,8 @@ public class FuzzyPlayer extends Player{
     protected float defensiveEnergy(){
         return sumShields() + Dice.intensity(getIntelligence());
     }
+    
+    public String toString(){
+        return "\nFuzzy:" + super.toString();
+    }
 }

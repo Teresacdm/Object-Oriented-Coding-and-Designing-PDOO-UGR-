@@ -86,7 +86,7 @@ public class Player extends LabyrinthCharacter{
     }
     
     public String toString(){
-        return "Estado del jugador:" + super.toString();
+        return "\nPlayer:" + super.toString();
     }
     
     private void receiveWeapon(Weapon w){

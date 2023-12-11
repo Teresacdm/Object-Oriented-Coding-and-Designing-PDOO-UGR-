@@ -35,7 +35,7 @@ public class Monster extends LabyrinthCharacter{
     }   
     
     public String toString(){
-        return "Estado del monstruo:" + super.toString();
+        return "\n" + super.toString();
     }
     
     
