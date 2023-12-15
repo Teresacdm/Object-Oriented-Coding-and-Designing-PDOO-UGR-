@@ -120,6 +120,10 @@ public class Labyrinth{
        return output;
     }
     
+    public void updatePlayer(Player player){
+        players[player.getRow()][player.getCol()]=player;
+    }
+    
     private boolean posOK(int row, int col){
         return (row >= 0 && row<nRows && col >= 0 && col<nCols);                   
     }
@@ -239,4 +243,6 @@ public class Labyrinth{
         return output;  // devolvemos (el monstruo si había, o null si no  hay monstruo)
     }
 }
+
+
 

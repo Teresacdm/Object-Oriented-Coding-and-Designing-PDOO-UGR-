@@ -154,7 +154,10 @@ public class Game {
         boolean resurrect = Dice.resurrectPlayer();
         if(resurrect){
             currentPlayer.resurrect();
-            currentPlayer = new FuzzyPlayer(currentPlayer);
+            FuzzyPlayer fuzzy_player = new FuzzyPlayer(currentPlayer);
+            players.set(currentPlayerIndex, fuzzy_player);
+            currentPlayer=fuzzy_player;
+            labyrinth.updatePlayer(currentPlayer);
             logResurrected();
         }
         else{

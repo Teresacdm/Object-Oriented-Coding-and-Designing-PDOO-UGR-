@@ -57,8 +57,18 @@ public class Cursors extends javax.swing.JDialog {
         });
 
         buttonRight.setText("RIGHT");
+        buttonRight.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonRightActionPerformed(evt);
+            }
+        });
 
         buttonLeft.setText("LEFT");
+        buttonLeft.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonLeftActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -94,18 +104,6 @@ public class Cursors extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void buttonRightActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        // TODO add your handling code here:
-        direction = Directions.RIGHT;
-        dispose();
-    }  
-    
-    private void buttonLeftActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        // TODO add your handling code here:
-        direction = Directions.LEFT;
-        dispose();
-    }
-    
     private void buttonDownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDownActionPerformed
         // TODO add your handling code here:
         direction = Directions.DOWN;
@@ -117,6 +115,18 @@ public class Cursors extends javax.swing.JDialog {
         direction = Directions.UP;
         dispose();
     }//GEN-LAST:event_buttonUPActionPerformed
+
+    private void buttonRightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRightActionPerformed
+        // TODO add your handling code here:
+        direction = Directions.RIGHT;
+        dispose();
+    }//GEN-LAST:event_buttonRightActionPerformed
+
+    private void buttonLeftActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLeftActionPerformed
+        // TODO add your handling code here:
+        direction = Directions.LEFT;
+        dispose();
+    }//GEN-LAST:event_buttonLeftActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

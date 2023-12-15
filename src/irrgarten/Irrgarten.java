@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package irrgarten;
+import irrgarten.UI.GraphicUI;
 import irrgarten.controller.Controller;
 import irrgarten.UI.UI;
 

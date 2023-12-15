@@ -11,7 +11,7 @@ import irrgarten.GameState;
  *
  * @author usuario
  */
-public class GraphicUI extends javax.swing.JFrame {
+public class GraphicUI extends javax.swing.JFrame implements UI{
 
     private Cursors c;
     /**
@@ -47,56 +47,80 @@ public class GraphicUI extends javax.swing.JFrame {
         monstersArea = new javax.swing.JTextArea();
         currentPlayer = new javax.swing.JLabel();
         winner = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        logArea = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         labyrinthArea.setColumns(20);
+        labyrinthArea.setFont(new java.awt.Font("Courier 10 Pitch", 0, 18)); // NOI18N
         labyrinthArea.setRows(5);
         labyrinthArea.setText("Laberinto:");
         jScrollPane1.setViewportView(labyrinthArea);
 
         playersArea.setColumns(20);
+        playersArea.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
         playersArea.setRows(5);
         playersArea.setText("Jugadores:");
         jScrollPane2.setViewportView(playersArea);
 
         monstersArea.setColumns(20);
+        monstersArea.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
         monstersArea.setRows(5);
         monstersArea.setText("Monstruos:");
         jScrollPane3.setViewportView(monstersArea);
 
+        currentPlayer.setFont(new java.awt.Font("Liberation Sans", 0, 24)); // NOI18N
         currentPlayer.setText("Jugador actual:");
 
+        winner.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
         winner.setText("¿Hay ganador?");
+
+        logArea.setColumns(20);
+        logArea.setRows(5);
+        jScrollPane4.setViewportView(logArea);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane3)
-                    .addComponent(jScrollPane2)
-                    .addComponent(jScrollPane1)
-                    .addComponent(currentPlayer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(winner, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(148, Short.MAX_VALUE))
+                .addGap(14, 14, 14)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 584, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(winner, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 584, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 999, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 999, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(currentPlayer, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(34, 34, 34))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 441, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(currentPlayer)
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
-                .addComponent(currentPlayer)
-                .addGap(18, 18, 18)
-                .addComponent(winner)
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addComponent(winner, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         pack();
@@ -109,14 +133,15 @@ public class GraphicUI extends javax.swing.JFrame {
     
     public void showGame(GameState gs){
         this.labyrinthArea.setText(gs.GetLabyrinth());
+        this.logArea.setText(gs.GetLog());
         this.playersArea.setText(gs.GetPlayers());
         this.monstersArea.setText(gs.GetMonsters());
-        this.currentPlayer.setText(Integer.toString(gs.GetCurrentPlayer()));
+        this.currentPlayer.setText("Jugador Actual: " + Integer.toString(gs.GetCurrentPlayer()));
         if(gs.GetWinner()){
-            this.winner.setText("Sí, hay ganador");
+            this.winner.setText("¡Ha ganado el Jugador " + gs.GetCurrentPlayer() + "!");
         }
         else{
-            this.winner.setText("No, aún no hay ganador");
+            this.winner.setText("Aún no hay ganador");
         }     
         repaint();
     }
@@ -127,7 +152,9 @@ public class GraphicUI extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTextArea labyrinthArea;
+    private javax.swing.JTextArea logArea;
     private javax.swing.JTextArea monstersArea;
     private javax.swing.JTextArea playersArea;
     private javax.swing.JLabel winner;

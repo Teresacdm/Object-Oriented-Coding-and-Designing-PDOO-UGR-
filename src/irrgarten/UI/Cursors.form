@@ -78,11 +78,17 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="RIGHT"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonRightActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="buttonLeft">
       <Properties>
         <Property name="text" type="java.lang.String" value="LEFT"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonLeftActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
